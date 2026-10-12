@@ -1,0 +1,4 @@
+<nav class="post-navigation" aria-label="記事ナビゲーション">
+  {{ with .PrevInSection }}<a rel="prev" href="{{ .RelPermalink }}"><span>新しい記事</span>{{ .LinkTitle }}</a>{{ end }}
+  {{ with .NextInSection }}<a rel="next" href="{{ .RelPermalink }}"><span>古い記事</span>{{ .LinkTitle }}</a>{{ end }}
+</nav>

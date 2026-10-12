@@ -1,0 +1,10 @@
+name = "Soft Focus"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A minimal starting point for a Japanese personal blog"
+tags = ["blog", "minimal", "Japanese"]
+features = ["responsive"]
+min_version = "0.83.0"
+
+[author]
+  name = "Aoi"

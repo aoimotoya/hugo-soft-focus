@@ -1,0 +1,13 @@
+{{- $title := site.Title -}}
+{{- if not .IsHome -}}{{- $title = printf "%s | %s" .Title site.Title -}}{{- end -}}
+{{- $description := .Description | default .Summary | default site.Params.description -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+{{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
+<title>{{ $title }}</title>
+{{ with site.Params.assets.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
+{{ with resources.Get "css/main.css" }}
+  {{ $style := . | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}

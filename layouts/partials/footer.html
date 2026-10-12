@@ -1,0 +1,4 @@
+<footer class="site-footer">
+  <small>© {{ now.Year }} {{ site.Title }}</small>
+  {{ with site.Params.footerText }}<div>{{ . | markdownify }}</div>{{ end }}
+</footer>

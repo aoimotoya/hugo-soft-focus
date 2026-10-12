@@ -1,0 +1,4 @@
+<p class="post-meta">
+  <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format (site.Params.DateFormat | default "2006-01-02") }}</time>
+  {{ with .ReadingTime }}<span> · {{ . }} {{ i18n "minuteRead" | default "分で読めます" }}</span>{{ end }}
+</p>
