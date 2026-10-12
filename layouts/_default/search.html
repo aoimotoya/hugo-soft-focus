@@ -1,8 +1,11 @@
 {{ define "main" }}
   <header class="page-header"><h1>{{ .Title }}</h1>{{ with .Content }}<div class="content">{{ . }}</div>{{ end }}</header>
-  <label class="search-label" for="site-search">{{ .Params.placeholder | default "記事を検索" }}</label>
-  <input id="site-search" class="search-input" type="search" autocomplete="off" placeholder="{{ .Params.placeholder | default "記事を検索" }}">
-  <p id="search-status" class="post-meta" aria-live="polite"></p>
+  {{ $placeholder := .Params.placeholder | default "記事を検索" }}
+  {{ if eq (lower $placeholder) "placeholder text in search input box" }}{{ $placeholder = "記事を検索" }}{{ end }}
+  <label class="search-label" for="site-search">{{ $placeholder }}</label>
+  <input id="site-search" class="search-input" type="search" autocomplete="off" aria-controls="search-results" aria-describedby="search-help search-status" placeholder="{{ $placeholder }}">
+  <p id="search-help" class="search-help">検索語を入力してください。↑↓キーで結果を選び、Enter キーで開けます。Esc キーで検索語を消去できます。</p>
+  <p id="search-status" class="post-meta" role="status" aria-live="polite" aria-atomic="true"></p>
   <ul id="search-results" class="search-results"></ul>
   {{ $opts := dict "minify" true "targetPath" "js/search.js" }}
   {{ with resources.Get "js/search.js" }}{{ $script := . | js.Build $opts | fingerprint }}
