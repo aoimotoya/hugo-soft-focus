@@ -1,5 +1,10 @@
+{{ with .GetTerms "categories" }}
+  <ul class="term-list category-list" aria-label="カテゴリ">
+    {{ range . }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
+  </ul>
+{{ end }}
 {{ with .GetTerms "tags" }}
-  <ul class="term-list" aria-label="タグ">
+  <ul class="term-list tag-list" aria-label="タグ">
     {{ range . }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
   </ul>
 {{ end }}

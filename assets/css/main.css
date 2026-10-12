@@ -116,3 +116,5 @@ h3 { font-size: 1.2rem; }
 }
 .search-help { margin: .35rem 0 .75rem; color: var(--muted); font-size: .86rem; }
 .search-results a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.category-list a { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--accent); font-weight: 600; }
+.tag-list a { color: var(--muted); }

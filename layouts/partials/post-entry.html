@@ -1,0 +1,12 @@
+{{- $page := .page -}}
+{{- $headingLevel := .headingLevel | default 2 -}}
+{{- $summaryMode := .summaryMode | default "auto" -}}
+<article class="post-entry">
+  <h{{ $headingLevel }}><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h{{ $headingLevel }}>
+  {{ partial "post-meta.html" $page }}
+  {{ if ne $summaryMode "hidden" }}
+    {{ with $page.Summary }}<div class="summary content">{{ . }}</div>{{ end }}
+    {{ if and (ne $summaryMode "auto") $page.Truncated }}<a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>{{ end }}
+  {{ end }}
+  {{ partial "terms-inline.html" $page }}
+</article>
