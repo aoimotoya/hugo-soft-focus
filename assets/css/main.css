@@ -118,3 +118,8 @@ h3 { font-size: 1.2rem; }
 .search-results a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 .category-list a { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--accent); font-weight: 600; }
 .tag-list a { color: var(--muted); }
+.breadcrumbs { margin: 0 0 1rem; color: var(--muted); font-size: .88rem; }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.breadcrumbs li + li::before { content: "/"; margin-inline-end: .35rem; color: var(--line); }
+.breadcrumbs a { color: var(--muted); text-decoration: none; }
+.breadcrumbs [aria-current="page"] { color: var(--fg); }

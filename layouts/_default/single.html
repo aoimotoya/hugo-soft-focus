@@ -1,5 +1,6 @@
 {{ define "main" }}
   <article class="single">
+    {{ if site.Params.ShowBreadCrumbs }}{{ partial "breadcrumbs.html" . }}{{ end }}
     <header class="page-header">
       <h1>{{ .Title }}</h1>
       {{ partial "post-meta.html" . }}

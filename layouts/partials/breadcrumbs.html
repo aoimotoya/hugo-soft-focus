@@ -1,0 +1,12 @@
+{{- $ancestors := .Ancestors.Reverse -}}
+<nav class="breadcrumbs" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="{{ site.Home.RelPermalink }}">{{ site.Params.label.text | default site.Title }}</a></li>
+    {{- range $ancestors -}}
+      {{- if and .IsSection (ne .RelPermalink site.Home.RelPermalink) -}}
+        <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{- end -}}
+    {{- end -}}
+    <li aria-current="page">{{ .LinkTitle }}</li>
+  </ol>
+</nav>
