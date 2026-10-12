@@ -1,18 +1,3 @@
 {{ define "main" }}
-  {{ with site.Params.homeInfoParams }}
-    <section class="home-info">
-      <h1>{{ .Title | default site.Title }}</h1>
-      <div class="content">{{ .Content | markdownify }}</div>
-    </section>
-  {{ end }}
-  {{ $posts := where site.RegularPages "Section" "posts" }}
-  <header class="section-heading"><h2>記事</h2><a href="{{ "posts/" | relURL }}">すべて見る →</a></header>
-  {{ range first (site.Params.paginate | default 10) $posts }}
-    <article class="post-entry">
-      <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
-      {{ partial "post-meta.html" . }}
-      {{ with .Summary }}<div class="summary content">{{ . }}</div>{{ end }}
-      {{ partial "terms-inline.html" . }}
-    </article>
-  {{ else }}<p>記事はまだありません。</p>{{ end }}
+  {{ partial "post-list.html" . }}
 {{ end }}

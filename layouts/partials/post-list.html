@@ -1,0 +1,9 @@
+{{- $listOptions := site.Params.list | default dict -}}
+{{- $summaryMode := $listOptions.summary | default "show" -}}
+{{ if not .IsHome }}
+  <header class="page-header"><h1>{{ .Title | default "記事" }}</h1>{{ with .Content }}<div class="content">{{ . }}</div>{{ end }}</header>
+{{ end }}
+{{ range .Paginator.Pages }}
+  {{ partial "post-entry.html" (dict "page" . "headingLevel" 2 "summaryMode" $summaryMode) }}
+{{ else }}<p>記事はまだありません。</p>{{ end }}
+{{ partial "pagination.html" . }}
