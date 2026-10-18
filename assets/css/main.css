@@ -91,6 +91,8 @@ h3 { font-size: 1.2rem; }
 .post-entry h2, .post-entry h3 { margin: 0; }
 .post-meta { margin: .4rem 0 .75rem; color: var(--muted); font-size: .9rem; }
 .summary { color: var(--muted); }
+.post-entry .summary h2, .post-entry .summary h3, .post-entry .summary h4, .post-entry .summary h5, .post-entry .summary h6 { margin: 1.25rem 0 .45rem; color: var(--fg); font-size: 1.05rem; }
+.post-entry .summary > :first-child { margin-top: 0; }
 .read-more { display: inline-block; margin-top: .25rem; }
 .term-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: .75rem 0 0; padding: 0; list-style: none; }
 .term-list a { display: inline-block; padding: .1rem .55rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .82rem; text-decoration: none; }
