@@ -1,11 +1,11 @@
 {{- $page := .page -}}
 {{- $headingLevel := .headingLevel | default 2 -}}
-{{- $summaryMode := .summaryMode | default "auto" -}}
+{{- $previewMode := .previewMode | default "section" -}}
 <article class="post-entry">
   <h{{ $headingLevel }}><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h{{ $headingLevel }}>
   {{ partial "post-meta.html" $page }}
-  {{ if ne $summaryMode "hidden" }}
-    {{ if eq $summaryMode "auto" }}
+  {{ if ne $previewMode "hidden" }}
+    {{ if eq $previewMode "summary" }}
       {{ with $page.Summary }}<div class="summary content">{{ . }}</div>{{ end }}
       {{ if $page.Truncated }}<a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>{{ end }}
     {{ else }}

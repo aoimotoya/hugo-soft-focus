@@ -1,12 +1,13 @@
 {{- $title := site.Title -}}
 {{- if not .IsHome -}}{{- $title = printf "%s | %s" .Title site.Title -}}{{- end -}}
 {{- $description := .Description | default .Summary | default site.Params.description -}}
+{{- $settings := partial "theme-settings.html" . -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 {{ with resources.Get "js/theme-init.js" }}
   {{ $script := . | minify | fingerprint }}
-  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-default-theme="{{ $settings.defaultTheme }}" data-disable-toggle="{{ $settings.disableThemeToggle }}"></script>
 {{ end }}
 {{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
 <title>{{ $title }}</title>
@@ -15,7 +16,9 @@
   {{ $style := . | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 {{ end }}
-{{ with resources.Get "js/theme-toggle.js" }}
-  {{ $script := . | minify | fingerprint }}
-  <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{ if not $settings.disableThemeToggle }}
+  {{ with resources.Get "js/theme-toggle.js" }}
+    {{ $script := . | minify | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  {{ end }}
 {{ end }}

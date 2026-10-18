@@ -1,0 +1,26 @@
+{{- $params := site.Params -}}
+{{- $showTOC := true -}}
+{{- if isset $params "showtoc" -}}{{- $showTOC = $params.showtoc -}}{{- end -}}
+{{- $showPostNavLinks := true -}}
+{{- if isset $params "showpostnavlinks" -}}{{- $showPostNavLinks = $params.showpostnavlinks -}}{{- end -}}
+{{- $list := $params.list | default dict -}}
+{{- $preview := "section" -}}
+{{- if isset $list "preview" -}}
+  {{- $preview = $list.preview -}}
+{{- else if isset $list "summary" -}}
+  {{- if eq $list.summary "auto" -}}{{- $preview = "summary" -}}
+  {{- else if eq $list.summary "hidden" -}}{{- $preview = "hidden" -}}{{- end -}}
+{{- end -}}
+{{- if not (in (slice "section" "summary" "hidden") $preview) -}}{{- $preview = "section" -}}{{- end -}}
+{{- $defaultTheme := $params.defaulttheme | default "auto" -}}
+{{- if not (in (slice "auto" "light" "dark") $defaultTheme) -}}{{- $defaultTheme = "auto" -}}{{- end -}}
+{{- return (dict
+  "dateFormat" ($params.dateformat | default "2006-01-02")
+  "showTOC" $showTOC
+  "showBreadCrumbs" ($params.showbreadcrumbs | default false)
+  "showReadingTime" ($params.showreadingtime | default false)
+  "showPostNavLinks" $showPostNavLinks
+  "preview" $preview
+  "defaultTheme" $defaultTheme
+  "disableThemeToggle" ($params.disablethemetoggle | default false)
+) -}}

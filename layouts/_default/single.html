@@ -1,15 +1,16 @@
 {{ define "main" }}
+  {{ $settings := partial "theme-settings.html" . }}
   <article class="single">
-    {{ if site.Params.ShowBreadCrumbs }}{{ partial "breadcrumbs.html" . }}{{ end }}
+    {{ if $settings.showBreadCrumbs }}{{ partial "breadcrumbs.html" . }}{{ end }}
     <header class="page-header">
       <h1>{{ .Title }}</h1>
       {{ partial "post-meta.html" . }}
       {{ partial "terms-inline.html" . }}
     </header>
-    {{ if and (site.Params.showtoc | default true) .TableOfContents }}
+    {{ if and $settings.showTOC .TableOfContents }}
       <aside class="toc"><strong>目次</strong>{{ .TableOfContents }}</aside>
     {{ end }}
     <div class="content">{{ .Content }}</div>
-    {{ partial "post-navigation.html" . }}
+    {{ if $settings.showPostNavLinks }}{{ partial "post-navigation.html" . }}{{ end }}
   </article>
 {{ end }}

@@ -1,4 +1,5 @@
+{{ $settings := partial "theme-settings.html" . }}
 <p class="post-meta">
-  <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format (site.Params.DateFormat | default "2006-01-02") }}</time>
-  {{ if site.Params.ShowReadingTime }}<span> · {{ .ReadingTime }} {{ i18n "minuteRead" | default "分で読めます" }}</span>{{ end }}
+  <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format $settings.dateFormat }}</time>
+  {{ if $settings.showReadingTime }}<span> · {{ .ReadingTime }} {{ i18n "minuteRead" | default "分で読めます" }}</span>{{ end }}
 </p>
