@@ -36,6 +36,7 @@ All settings below are optional. Add them to your site configuration, not to the
 | `params.ShowPostNavLinks` | `true` | Show newer and older article links |
 | `params.ShowCodeCopyButtons` | `false` | Add copy buttons to code blocks on article pages |
 | `params.ShowRssButtonInSectionTermList` | `false` | Show RSS links on section and term lists |
+| `params.disableScrollToTop` | `false` | Hide the back-to-top button |
 | `params.list.preview` | `section` | `section`: first content section with headings and rich content; `summary`: Hugo summary; `hidden`: no preview |
 | `params.defaultTheme` | `auto` | Initial appearance: `auto`, `light`, or `dark` |
 | `params.disableThemeToggle` | `false` | Hide the appearance switcher and use `defaultTheme` |

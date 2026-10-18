@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ or site.Language.LanguageCode site.Language.Lang }}">
   <head>{{ partial "head.html" . }}</head>
-  <body>
+  <body id="top">
     <a class="skip-link" href="#main-content">本文へ移動</a>
     {{ partial "header.html" . }}
     <main id="main-content" class="site-main">{{ block "main" . }}{{ end }}</main>

@@ -2,3 +2,5 @@
   <small>© {{ now.Year }} {{ site.Title }}</small>
   {{ with site.Params.footerText }}<div>{{ . | markdownify }}</div>{{ end }}
 </footer>
+{{ $settings := partial "theme-settings.html" . }}
+{{ if not $settings.disableScrollToTop }}<a class="back-to-top" href="#top" aria-label="ページ上部へ戻る" hidden>↑</a>{{ end }}

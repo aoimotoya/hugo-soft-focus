@@ -30,6 +30,12 @@
     <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
   {{ end }}
 {{ end }}
+{{ if not $settings.disableScrollToTop }}
+  {{ with resources.Get "js/scroll-to-top.js" }}
+    {{ $script := . | minify | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  {{ end }}
+{{ end }}
 {{ if not $settings.disableThemeToggle }}
   {{ with resources.Get "js/theme-toggle.js" }}
     {{ $script := . | minify | fingerprint }}
