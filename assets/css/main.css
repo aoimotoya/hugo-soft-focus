@@ -125,10 +125,10 @@ h3 { font-size: 1.25rem; }
     14px 14px 0 -1px var(--accent-soft),
     14px 14px 0 0 var(--line),
     var(--shadow);
-  transition: transform .2s ease, border-color .2s ease;
+  transition: border-color .2s ease;
 }
 .post-entry::before { content: ""; position: absolute; top: -1px; left: clamp(1.5rem, 4vw, 2.5rem); width: 5rem; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
-.post-entry:hover { transform: translate(-3px, -3px); border-color: var(--accent); }
+.post-entry:hover { border-color: var(--accent); }
 .post-entry h2, .post-entry h3 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.15rem); }
 .post-entry > h2 a, .post-entry > h3 a { color: var(--fg); text-decoration: none; }
 .post-entry > h2 a:hover, .post-entry > h3 a:hover { color: var(--link); }
@@ -241,7 +241,6 @@ h3 { font-size: 1.25rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .post-entry { transition: none; }
-  .post-entry:hover { transform: none; }
 }
 .search-help { margin: .35rem 0 .75rem; color: var(--muted); font-size: .95rem; }
 .search-results a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
