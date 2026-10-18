@@ -1,6 +1,6 @@
 # Soft Focus
 
-A minimal Hugo theme starter. It can be maintained in its own Git repository and added to a Hugo site as a Git submodule, without changing existing content files.
+A Hugo theme with layered article cards, an autumn light palette, and a winter dark palette. It can be maintained in its own Git repository and added to a Hugo site as a Git submodule, without changing existing content files.
 
 ## Use with the blog
 
@@ -60,6 +60,10 @@ outputs:
 ```
 
 The older `params.list.summary` values `show`, `auto`, and `hidden` remain accepted as aliases for `section`, `summary`, and `hidden`.
+
+## Typography
+
+The theme loads Noto Sans JP from Google Fonts for text and Noto Sans Mono for code blocks. Japanese characters in code blocks use an available monospaced fallback, which may vary by system. Visitors need access to Google Fonts for these typefaces; otherwise the browser uses fallback fonts.
 
 ## Theme development
 
