@@ -24,6 +24,12 @@
   {{ $script := . | minify | fingerprint }}
   <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 {{ end }}
+{{ if and .IsPage (.Param "ShowCodeCopyButtons") }}
+  {{ with resources.Get "js/code-copy.js" }}
+    {{ $script := . | minify | fingerprint }}
+    <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+  {{ end }}
+{{ end }}
 {{ if not $settings.disableThemeToggle }}
   {{ with resources.Get "js/theme-toggle.js" }}
     {{ $script := . | minify | fingerprint }}
