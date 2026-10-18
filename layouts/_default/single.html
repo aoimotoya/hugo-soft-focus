@@ -8,7 +8,7 @@
       {{ partial "terms-inline.html" . }}
     </header>
     {{ if and $settings.showTOC .TableOfContents }}
-      <aside class="toc"><strong>目次</strong>{{ .TableOfContents }}</aside>
+      <aside class="toc"><details{{ if $settings.tocOpen }} open{{ end }}><summary>目次</summary>{{ .TableOfContents }}</details></aside>
     {{ end }}
     <div class="content">{{ .Content }}</div>
     {{ if $settings.showPostNavLinks }}{{ partial "post-navigation.html" . }}{{ end }}

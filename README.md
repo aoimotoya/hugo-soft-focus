@@ -27,6 +27,7 @@ All settings below are optional. Add them to your site configuration, not to the
 | `paginate` | Hugo default | Number of articles per page on the home page and list pages |
 | `params.DateFormat` | `2006-01-02` | Date layout in Go's format |
 | `params.showtoc` | `true` | Show the table of contents on article pages |
+| `params.tocopen` | `false` | Start the collapsible table of contents open |
 | `params.ShowBreadCrumbs` | `false` | Show article breadcrumbs |
 | `params.ShowReadingTime` | `false` | Show estimated reading time |
 | `params.author` or page `author` | none | Show the author in article metadata |

@@ -17,6 +17,7 @@
 {{- return (dict
   "dateFormat" ($params.dateformat | default "2006-01-02")
   "showTOC" $showTOC
+  "tocOpen" ($params.tocopen | default false)
   "showBreadCrumbs" ($params.showbreadcrumbs | default false)
   "showReadingTime" ($params.showreadingtime | default false)
   "showPostNavLinks" $showPostNavLinks
