@@ -25,6 +25,7 @@ All settings below are optional. Add them to your site configuration, not to the
 | Setting | Default | Effect |
 | --- | --- | --- |
 | `paginate` | Hugo default | Number of articles per page on the home page and list pages |
+| `params.mainSections` | `["posts"]` | Content sections included in the archive |
 | `params.DateFormat` | `2006-01-02` | Date layout in Go's format |
 | `params.showtoc` | `true` | Show the table of contents on article pages |
 | `params.tocopen` | `false` | Start the collapsible table of contents open |
