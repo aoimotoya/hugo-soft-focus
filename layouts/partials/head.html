@@ -1,6 +1,6 @@
 {{- $title := site.Title -}}
 {{- if not .IsHome -}}{{- $title = printf "%s | %s" .Title site.Title -}}{{- end -}}
-{{- $description := .Description | default .Summary | default site.Params.description -}}
+{{- $description := .Description | default .Summary | default site.Params.description | plainify -}}
 {{- $settings := partial "theme-settings.html" . -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,7 @@
 {{ end }}
 {{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
 <title>{{ $title }}</title>
+{{ partial "page-meta.html" (dict "page" . "title" $title "description" $description) }}
 {{ with site.Params.assets.favicon }}<link rel="icon" href="{{ . | relURL }}">{{ end }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

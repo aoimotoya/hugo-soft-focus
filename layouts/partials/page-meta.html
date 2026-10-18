@@ -1,0 +1,31 @@
+{{- $page := .page -}}
+{{- $title := .title -}}
+{{- $description := .description -}}
+{{- $canonical := $page.Params.canonicalURL | default $page.Permalink -}}
+{{- $author := $page.Params.author | default site.Params.author -}}
+{{- if reflect.IsMap $author -}}{{- $author = $author.name -}}{{- else if reflect.IsSlice $author -}}{{- $author = delimit $author ", " -}}{{- end -}}
+{{- $production := or hugo.IsProduction (eq site.Params.env "production") -}}
+
+<link rel="canonical" href="{{ $canonical }}">
+<meta name="robots" content="{{ if and $production (ne $page.Params.robotsNoIndex true) }}index, follow{{ else }}noindex, nofollow{{ end }}">
+{{ with $author }}<meta name="author" content="{{ . }}">{{ end }}
+{{ with site.Params.analytics.google.SiteVerificationTag }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
+{{ range $page.AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}">{{ end }}
+
+{{ if $production }}
+  {{ template "_internal/google_analytics.html" $page }}
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:type" content="{{ if and $page.IsPage (ne $page.Layout "archives") (ne $page.Layout "search") }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ $canonical }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  {{- $schema := dict "@context" "https://schema.org" "@type" "WebSite" "name" site.Title "url" site.Home.Permalink -}}
+  {{- if and $page.IsPage (ne $page.Layout "archives") (ne $page.Layout "search") -}}
+    {{- $schema = dict "@context" "https://schema.org" "@type" "BlogPosting" "headline" $page.Title "url" $canonical "datePublished" ($page.Date.Format "2006-01-02T15:04:05Z07:00") "description" $description -}}
+    {{- with $author -}}{{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}{{- end -}}
+  {{- end -}}
+  <script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>
+{{ end }}
