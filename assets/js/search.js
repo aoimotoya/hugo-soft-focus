@@ -64,14 +64,14 @@ const renderResults = (pages, query) => {
   const matches = pages
     .map((page) => ({ page, score: scorePage(page, terms) }))
     .filter((match) => match.score > 0)
-    .sort((a, b) => b.score - a.score || a.page.title.localeCompare(b.page.title))
-    .slice(0, maximumResults);
+    .sort((a, b) => b.score - a.score || a.page.title.localeCompare(b.page.title));
+  const visibleMatches = matches.slice(0, maximumResults);
 
   status.textContent = matches.length
-    ? `${matches.length} ${script.dataset.resultsLabel || "件の記事が見つかりました"}`
+    ? `${matches.length} ${script.dataset.resultsLabel || "件の記事が見つかりました"}${matches.length > visibleMatches.length ? `（先頭${visibleMatches.length}件を表示）` : ""}`
     : (script.dataset.emptyLabel || "記事が見つかりませんでした。");
 
-  for (const { page } of matches) {
+  for (const { page } of visibleMatches) {
     const item = document.createElement("li");
     const link = document.createElement("a");
     link.href = page.permalink;

@@ -67,6 +67,8 @@ outputs:
   home: [HTML, RSS, JSON]
 ```
 
+Search shows up to 30 articles. When more articles match, the result message shows the total count and notes that only the first 30 are displayed.
+
 The older `params.list.summary` values `show`, `auto`, and `hidden` remain accepted as aliases for `section`, `summary`, and `hidden`.
 
 ## Article previews
