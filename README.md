@@ -78,6 +78,8 @@ Markdown links and images with relative destinations resolve from the source art
 
 The theme loads Noto Sans JP from Google Fonts for text and Noto Sans Mono for code blocks. Japanese characters in code blocks use an available monospaced fallback, which may vary by system. Visitors need access to Google Fonts for these typefaces; otherwise the browser uses fallback fonts.
 
+When Hugo emits class-based Chroma markup, the theme colors syntax tokens for both appearance modes. The site's `markup.highlight.style` setting applies to inline styles, not to these theme colors.
+
 Images in article content and post previews open in a dialog when clicked. If a thumbnail links directly to an image file (`.jpg`, `.png`, `.webp`, and other common image formats), the dialog shows the linked full-size image. Other image links keep their link behavior. The dialog also supports keyboard opening, Escape to close it, and a close button.
 
 ## Theme development
