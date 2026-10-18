@@ -1,6 +1,14 @@
 {{- $settings := partial "theme-settings.html" . -}}
 {{ if not .IsHome }}
-  <header class="page-header"><h1>{{ .Title | default "記事" }}</h1>{{ with .Content }}<div class="content">{{ . }}</div>{{ end }}</header>
+  <header class="page-header">
+    <div class="page-header-row">
+      <h1>{{ .Title | default "記事" }}</h1>
+      {{ if and $settings.showRSSButton (or (eq .Kind "section") (eq .Kind "term")) }}
+        {{ with .OutputFormats.Get "rss" }}<a class="rss-link" href="{{ .RelPermalink }}" aria-label="この一覧の RSS を購読">RSS</a>{{ end }}
+      {{ end }}
+    </div>
+    {{ with .Content }}<div class="content">{{ . }}</div>{{ end }}
+  </header>
 {{ end }}
 {{ range .Paginator.Pages }}
   {{ partial "post-entry.html" (dict "page" . "headingLevel" 2 "previewMode" $settings.preview) }}

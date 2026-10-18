@@ -102,7 +102,10 @@ a:focus-visible, input:focus-visible, button:focus-visible { outline: 3px solid 
 .site-main { min-height: 65vh; padding: 3rem 0 5rem; }
 .site-footer { padding: 1.75rem 0 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 1rem; text-align: center; }
 .page-header { margin-bottom: 2rem; }
+.page-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .page-header h1 { margin: 0; }
+.rss-link { flex: none; padding: .3rem .75rem; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); font-size: .85rem; font-weight: 700; text-decoration: none; }
+.rss-link:hover { border-color: var(--accent); }
 h1, h2, h3, h4, h5, h6 { line-height: 1.35; text-wrap: pretty; }
 h1, h2 { font-family: var(--font-sans); letter-spacing: -.025em; }
 h1 { font-size: clamp(2rem, 5vw, 3rem); }
