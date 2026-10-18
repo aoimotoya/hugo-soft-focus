@@ -65,6 +65,8 @@ The older `params.list.summary` values `show`, `auto`, and `hidden` remain accep
 
 The theme loads Noto Sans JP from Google Fonts for text and Noto Sans Mono for code blocks. Japanese characters in code blocks use an available monospaced fallback, which may vary by system. Visitors need access to Google Fonts for these typefaces; otherwise the browser uses fallback fonts.
 
+Images in article content and post previews open in a dialog when clicked. If a thumbnail links directly to an image file (`.jpg`, `.png`, `.webp`, and other common image formats), the dialog shows the linked full-size image. Other image links keep their link behavior. The dialog also supports keyboard opening, Escape to close it, and a close button.
+
 ## Theme development
 
 The repository is standalone. Commit changes here, push it to a Git host, then update the submodule pointer in the site repository when ready.

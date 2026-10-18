@@ -19,6 +19,10 @@
   {{ $style := . | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 {{ end }}
+{{ with resources.Get "js/image-lightbox.js" }}
+  {{ $script := . | minify | fingerprint }}
+  <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{ end }}
 {{ if not $settings.disableThemeToggle }}
   {{ with resources.Get "js/theme-toggle.js" }}
     {{ $script := . | minify | fingerprint }}
