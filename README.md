@@ -29,6 +29,7 @@ All settings below are optional. Add them to your site configuration, not to the
 | `params.showtoc` | `true` | Show the table of contents on article pages |
 | `params.ShowBreadCrumbs` | `false` | Show article breadcrumbs |
 | `params.ShowReadingTime` | `false` | Show estimated reading time |
+| `params.author` or page `author` | none | Show the author in article metadata |
 | `params.ShowPostNavLinks` | `true` | Show newer and older article links |
 | `params.list.preview` | `section` | `section`: first content section with headings and rich content; `summary`: Hugo summary; `hidden`: no preview |
 | `params.defaultTheme` | `auto` | Initial appearance: `auto`, `light`, or `dark` |

@@ -1,5 +1,8 @@
 {{ $settings := partial "theme-settings.html" . }}
+{{ $author := .Params.author | default site.Params.author }}
+{{ if reflect.IsMap $author }}{{ $author = $author.name }}{{ else if reflect.IsSlice $author }}{{ $author = delimit $author ", " }}{{ end }}
 <p class="post-meta">
   <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format $settings.dateFormat }}</time>
   {{ if $settings.showReadingTime }}<span> · {{ .ReadingTime }} {{ i18n "minuteRead" | default "分で読めます" }}</span>{{ end }}
+  {{ with $author }}<span> · {{ . }}</span>{{ end }}
 </p>
