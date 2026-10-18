@@ -1,5 +1,2 @@
-{{- $destination := .Destination -}}
-{{- with .Page.Resources.GetMatch .Destination -}}
-  {{- $destination = .RelPermalink -}}
-{{- end -}}
+{{- $destination := partial "content-url.html" (dict "page" .Page "destination" .Destination) -}}
 <img src="{{ $destination | safeURL }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">

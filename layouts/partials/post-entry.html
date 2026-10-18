@@ -9,33 +9,9 @@
       {{ with $page.Summary }}<div class="summary content">{{ . }}</div>{{ end }}
       {{ if $page.Truncated }}<a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>{{ end }}
     {{ else }}
-      {{ $headingPattern := "(?s)<h[2-6](?:\\s[^>]*)?>.*?</h[2-6]>" }}
-      {{ $headings := findRE $headingPattern $page.Content }}
-      {{ $remaining := $page.Content }}
-      {{ $pendingHeadings := "" }}
-      {{ $preview := "" }}
-      {{ range $headings }}
-        {{ $afterHeading := index (split $remaining .) 1 }}
-        {{ $nextHeading := findRE $headingPattern $afterHeading 1 }}
-        {{ $section := $afterHeading }}
-        {{ with $nextHeading }}{{ $section = index (split $afterHeading (index . 0)) 0 }}{{ end }}
-        {{ if not $preview }}
-          {{ $pendingHeadings = printf "%s%s" $pendingHeadings (replaceRE " id=\"[^\"]*\"" "" .) }}
-          {{ if ne (trim $section " \n\t") "" }}{{ $preview = printf "%s%s" $pendingHeadings $section }}{{ end }}
-        {{ end }}
-        {{ $remaining = $afterHeading }}
-      {{ end }}
-      {{ if $preview }}
-        <div class="summary content">{{ $preview | safeHTML }}</div>
-        <a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>
-      {{ else }}
-        {{ $paragraphs := findRE "(?s)<p(?:\\s[^>]*)?>.*?</p>" $page.Content 1 }}
-        {{ with $paragraphs }}
-          {{ $firstParagraph := index . 0 }}
-          <div class="summary content">{{ $firstParagraph | safeHTML }}</div>
-          {{ if ne (trim $page.Content " \n\t") (trim $firstParagraph " \n\t") }}<a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>{{ end }}
-        {{ end }}
-      {{ end }}
+      {{ $preview := partial "post-preview.html" $page }}
+      {{ with $preview.html }}<div class="summary content">{{ . | safeHTML }}</div>{{ end }}
+      {{ if $preview.hasMore }}<a class="read-more" href="{{ $page.RelPermalink }}">続きを読む →</a>{{ end }}
     {{ end }}
   {{ end }}
   {{ partial "terms-inline.html" $page }}

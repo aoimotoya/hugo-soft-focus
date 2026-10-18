@@ -1,0 +1,45 @@
+{{- $content := .Content -}}
+{{- $headingPattern := `(?s)<h[2-6](?:\s[^>]*)?>.*?</h[2-6]>` -}}
+{{- $headings := findRE $headingPattern $content -}}
+{{- $remaining := $content -}}
+{{- $pendingHeadings := "" -}}
+{{- $preview := "" -}}
+
+{{- range $headings -}}
+  {{- if not $preview -}}
+    {{- /* Rejoin after splitting so repeated, identical headings remain in the content. */ -}}
+    {{- $afterHeading := delimit (after 1 (split $remaining .)) . -}}
+    {{- $nextHeading := findRE $headingPattern $afterHeading 1 -}}
+    {{- $section := $afterHeading -}}
+    {{- with $nextHeading -}}{{- $section = index (split $afterHeading (index . 0)) 0 -}}{{- end -}}
+    {{- $pendingHeadings = printf "%s%s" $pendingHeadings . -}}
+    {{- $hasText := ne (trim ($section | plainify) " \n\t") "" -}}
+    {{- $hasMedia := gt (len (findRE `(?i)<(?:img|video|audio|iframe|svg)\b` $section 1)) 0 -}}
+    {{- if or $hasText $hasMedia -}}
+      {{- $preview = printf "%s%s" $pendingHeadings $section -}}
+    {{- else -}}
+      {{- $pendingHeadings = printf "%s%s" $pendingHeadings $section -}}
+    {{- end -}}
+    {{- $remaining = $afterHeading -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $preview -}}
+  {{- range (findRE `(?s)<p(?:\s[^>]*)?>.*?</p>` $content) -}}
+    {{- if not $preview -}}
+      {{- $hasText := ne (trim (. | plainify) " \n\t") "" -}}
+      {{- $hasMedia := gt (len (findRE `(?i)<(?:img|video|audio|iframe|svg)\b` . 1)) 0 -}}
+      {{- if or $hasText $hasMedia -}}{{- $preview = . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $preview -}}
+    {{- /* An article made only of lists, code, or media stays visible. */ -}}
+    {{- $preview = $content -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Repeated previews can otherwise duplicate IDs from the source article. */ -}}
+{{- $preview = replaceRE ` id="[^"]*"` "" $preview -}}
+{{- $fullComparable := trim (replaceRE ` id="[^"]*"` "" $content) " \n\t" -}}
+{{- $previewComparable := trim (replaceRE ` id="[^"]*"` "" $preview) " \n\t" -}}
+{{- return (dict "html" $preview "hasMore" (ne $fullComparable $previewComparable)) -}}

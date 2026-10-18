@@ -61,6 +61,12 @@ outputs:
 
 The older `params.list.summary` values `show`, `auto`, and `hidden` remain accepted as aliases for `section`, `summary`, and `hidden`.
 
+## Article previews
+
+In the default `section` mode, article lists show the first h2–h6 section that contains text or media. The preview keeps its headings and complete rendered elements, including lists, code blocks, and images. Consecutive headings without content remain with the first populated section. If no section contains content, the preview uses the first paragraph; articles without paragraphs show their full content.
+
+Markdown links and images with relative destinations resolve from the source article, so they also work in previews on the home page and taxonomy pages. Fragment links such as `#details` lead to the source article. The “read more” link appears only when the preview omits content.
+
 ## Typography
 
 The theme loads Noto Sans JP from Google Fonts for text and Noto Sans Mono for code blocks. Japanese characters in code blocks use an available monospaced fallback, which may vary by system. Visitors need access to Google Fonts for these typefaces; otherwise the browser uses fallback fonts.

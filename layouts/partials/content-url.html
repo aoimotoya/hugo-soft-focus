@@ -1,0 +1,16 @@
+{{- $destination := .destination -}}
+{{- with .page.Resources.GetMatch $destination -}}
+  {{- $destination = .RelPermalink -}}
+{{- else -}}
+  {{- /* Relative links must resolve from the article, even in a listing preview. */ -}}
+  {{- if and (not (hasPrefix $destination "/")) (not (findRE `^[A-Za-z][A-Za-z0-9+.-]*:` $destination)) -}}
+    {{- if or (hasPrefix $destination "#") (hasPrefix $destination "?") -}}
+      {{- $destination = printf "%s%s" $.page.RelPermalink $destination -}}
+    {{- else -}}
+      {{- $base := $.page.RelPermalink -}}
+      {{- if not (hasSuffix $base "/") -}}{{- $base = path.Dir $base -}}{{- end -}}
+      {{- $destination = printf "%s/%s" (strings.TrimSuffix "/" $base) $destination -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $destination -}}
