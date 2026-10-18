@@ -7,7 +7,7 @@
 {{- $production := or hugo.IsProduction (eq site.Params.env "production") -}}
 
 <link rel="canonical" href="{{ $canonical }}">
-<meta name="robots" content="{{ if and $production (ne $page.Params.robotsNoIndex true) }}index, follow{{ else }}noindex, nofollow{{ end }}">
+<meta name="robots" content="{{ if and $production (ne $page.Params.robotsNoIndex true) (ne $page.Layout "search") (ne $page.Kind "404") }}index, follow{{ else }}noindex, nofollow{{ end }}">
 {{ with $author }}<meta name="author" content="{{ . }}">{{ end }}
 {{ with site.Params.analytics.google.SiteVerificationTag }}<meta name="google-site-verification" content="{{ . }}">{{ end }}
 {{ range $page.AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}">{{ end }}
