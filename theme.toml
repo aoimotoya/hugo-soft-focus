@@ -4,7 +4,7 @@ licenselink = "https://opensource.org/licenses/MIT"
 description = "A minimal starting point for a Japanese personal blog"
 tags = ["blog", "minimal", "Japanese"]
 features = ["responsive"]
-min_version = "0.125.0"
+min_version = "0.158.0"
 
 [author]
   name = "Aoi"
