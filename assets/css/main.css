@@ -266,6 +266,10 @@ h3 { font-size: 1.25rem; }
 .search-results li { margin: 0 .5rem 1rem 0; padding: 1rem 1.2rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--card); box-shadow: 5px 5px 0 var(--surface); }
 .search-results li:focus-within { border-radius: .6rem; background: var(--surface); }
 .search-results p { margin: .35rem 0 0; color: var(--muted); font-size: 1rem; }
+.search-more-wrap { margin-top: 1.5rem; text-align: center; }
+.search-more { padding: .65rem 1.25rem; border: 1px solid var(--line); border-radius: 99px; background: var(--card); color: var(--fg); font: inherit; cursor: pointer; box-shadow: 4px 4px 0 var(--surface); }
+.search-more:hover { background: var(--surface); }
+.search-more:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 @media (max-width: 600px) {
   body { font-size: 1.0625rem; }
   .site-header { grid-template-columns: minmax(0, 1fr) auto; padding: 1.3rem 0 1rem; }

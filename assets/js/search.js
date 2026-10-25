@@ -2,8 +2,12 @@ const script = document.currentScript;
 const input = document.querySelector("#site-search");
 const results = document.querySelector("#search-results");
 const status = document.querySelector("#search-status");
+const moreWrap = document.querySelector("#search-more-wrap");
+const moreButton = document.querySelector("#search-more");
 const indexURL = script?.dataset.index;
-const maximumResults = 30;
+const batchSize = 30;
+let matches = [];
+let visibleCount = 0;
 
 const normalize = (value) =>
   (value || "")
@@ -51,27 +55,14 @@ const scorePage = (page, terms) => {
 const clearResults = () => {
   results.replaceChildren();
   status.textContent = "";
+  moreWrap.hidden = true;
+  matches = [];
+  visibleCount = 0;
 };
 
-const renderResults = (pages, query) => {
-  results.replaceChildren();
-  const terms = makeTerms(normalize(query));
-  if (terms.length === 0) {
-    status.textContent = "";
-    return;
-  }
-
-  const matches = pages
-    .map((page) => ({ page, score: scorePage(page, terms) }))
-    .filter((match) => match.score > 0)
-    .sort((a, b) => b.score - a.score || a.page.title.localeCompare(b.page.title));
-  const visibleMatches = matches.slice(0, maximumResults);
-
-  status.textContent = matches.length
-    ? `${matches.length} ${script.dataset.resultsLabel || "件の記事が見つかりました"}${matches.length > visibleMatches.length ? `（先頭${visibleMatches.length}件を表示）` : ""}`
-    : (script.dataset.emptyLabel || "記事が見つかりませんでした。");
-
-  for (const { page } of visibleMatches) {
+const appendResults = () => {
+  const nextMatches = matches.slice(visibleCount, visibleCount + batchSize);
+  for (const { page } of nextMatches) {
     const item = document.createElement("li");
     const link = document.createElement("a");
     link.href = page.permalink;
@@ -84,9 +75,28 @@ const renderResults = (pages, query) => {
     }
     results.append(item);
   }
+
+  visibleCount += nextMatches.length;
+  status.textContent = `${matches.length} ${script.dataset.resultsLabel || "件の記事が見つかりました"}${visibleCount < matches.length ? `（1–${visibleCount}件目を表示）` : ""}`;
+  const remaining = matches.length - visibleCount;
+  moreWrap.hidden = remaining === 0;
+  if (remaining > 0) moreButton.textContent = `さらに${Math.min(batchSize, remaining)}件を表示`;
 };
 
-if (input && results && status && indexURL) {
+const renderResults = (pages, query) => {
+  clearResults();
+  const terms = makeTerms(normalize(query));
+  if (terms.length === 0) return;
+
+  matches = pages
+    .map((page) => ({ page, score: scorePage(page, terms) }))
+    .filter((match) => match.score > 0)
+    .sort((a, b) => b.score - a.score || a.page.title.localeCompare(b.page.title));
+  if (matches.length) appendResults();
+  else status.textContent = script.dataset.emptyLabel || "記事が見つかりませんでした。";
+};
+
+if (input && results && status && moreWrap && moreButton && indexURL) {
   fetch(indexURL)
     .then((response) => {
       if (!response.ok) throw new Error("Search index could not be loaded");
@@ -95,6 +105,12 @@ if (input && results && status && indexURL) {
     .then((pages) => {
       const searchable = pages.filter((page) => page.permalink && page.title);
       input.addEventListener("input", () => renderResults(searchable, input.value));
+      moreButton.addEventListener("click", () => {
+        const firstNewIndex = visibleCount;
+        appendResults();
+        results.querySelectorAll("a")[firstNewIndex]?.focus();
+      });
+      renderResults(searchable, input.value);
 
       // Listen at document level so key handling continues after focus moves
       // from the input into a result link. The input's search control can

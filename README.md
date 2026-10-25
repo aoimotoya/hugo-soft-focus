@@ -68,7 +68,7 @@ outputs:
   home: [HTML, RSS, JSON]
 ```
 
-Search shows up to 30 articles. When more articles match, the result message shows the total count and notes that only the first 30 are displayed.
+Search initially shows 30 articles. When more articles match, the result message shows the total count and a button loads the next 30. Repeat until all results are visible. The arrow keys also navigate newly loaded results.
 
 The sitemap omits the search page, the 404 page, and pages with `robotsNoIndex: true`. It also respects Hugo's `sitemap.disable`, change frequency, and priority settings.
 

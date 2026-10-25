@@ -7,6 +7,9 @@
   <p id="search-help" class="search-help">検索語を入力してください。↑↓キーで結果を選び、Enter キーで開けます。Esc キーで検索語を消去できます。</p>
   <p id="search-status" class="post-meta" role="status" aria-live="polite" aria-atomic="true"></p>
   <ul id="search-results" class="search-results"></ul>
+  <div id="search-more-wrap" class="search-more-wrap" hidden>
+    <button id="search-more" class="search-more" type="button" aria-controls="search-results">さらに表示</button>
+  </div>
   {{ $opts := dict "minify" true "targetPath" "js/search.js" }}
   {{ with resources.Get "js/search.js" }}{{ $script := . | js.Build $opts | fingerprint }}
     <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" data-index="{{ "index.json" | relURL }}" data-results-label="{{ i18n "searchResults" | default "件の記事が見つかりました" }}" data-empty-label="{{ i18n "searchEmpty" | default "記事が見つかりませんでした。" }}"></script>
