@@ -1,22 +1,55 @@
 # Soft Focus
 
-A Hugo theme with layered article cards, an autumn light palette, and a winter dark palette. It can be maintained in its own Git repository and added to a Hugo site as a Git submodule, without changing existing content files.
+A Hugo blog theme with layered article cards, an autumn light palette, and a winter dark palette. It supports existing Markdown articles without requiring changes to their content files. The theme is designed to live in its own Git repository and be installed as a submodule.
 
-## Use with the blog
+## Install
 
-From the root of your Hugo site:
+Use Hugo 0.158.0 or newer. From the root of your Hugo site, add this repository under `themes/` (replace `OWNER` with the repository owner):
 
 ```sh
-git submodule add <theme-repository-url> themes/hugo-soft-focus
+git submodule add https://github.com/OWNER/hugo-soft-focus.git themes/hugo-soft-focus
 ```
 
-Then change only the site configuration (`config.yml`) to:
+Then set the theme in the site configuration:
 
 ```yaml
 theme: hugo-soft-focus
 ```
 
-Run `hugo server` from the site repository to preview it. The theme reads existing content and `menu.main`; Markdown files do not need to change. Edit `assets/css/main.css` and the templates in `layouts/` to develop the design.
+Run `hugo server` from the site repository and open the local URL printed by Hugo. The theme reads existing content and `menu.main`; existing article files do not need to change. The theme's interface text is primarily Japanese.
+
+To update the theme later, update the submodule in your site repository and commit the new submodule pointer.
+
+## Optional pages
+
+To enable search, add JSON to the home outputs in the site configuration:
+
+```yaml
+outputs:
+  home: [HTML, RSS, JSON]
+```
+
+Create `content/search.md` if your site does not already have a search page:
+
+```yaml
+---
+title: Search
+layout: search
+---
+```
+
+Search runs in the browser using the generated `index.json`. It initially shows 30 articles, and a button loads the next 30 until all matches are visible. The arrow keys navigate the displayed results.
+
+For a year-by-year archive, create `content/archives.md`:
+
+```yaml
+---
+title: Archive
+layout: archives
+---
+```
+
+The archive includes the sections listed in `params.mainSections` (default: `posts`). If these pages already exist, keep their Markdown files as they are.
 
 ## Settings
 
@@ -24,7 +57,7 @@ All settings below are optional. Add them to your site configuration, not to the
 
 | Setting | Default | Effect |
 | --- | --- | --- |
-| `paginate` | Hugo default | Number of articles per page on the home page and list pages |
+| `pagination.pagerSize` | Hugo default | Number of articles per page on the home page and list pages |
 | `params.mainSections` | `["posts"]` | Content sections included in the archive |
 | `params.DateFormat` | `2006-01-02` | Date layout in Go's format |
 | `params.showtoc` | `true` | Show the table of contents on article pages |
@@ -46,7 +79,8 @@ All settings below are optional. Add them to your site configuration, not to the
 For example:
 
 ```yaml
-paginate: 10
+pagination:
+  pagerSize: 10
 params:
   DateFormat: "2006-01-02"
   showtoc: false
@@ -60,15 +94,6 @@ params:
 ```
 
 The appearance switcher starts with `defaultTheme` and then uses a visitor's saved choice when available. `auto` follows the operating system. With `disableThemeToggle: true`, saved choices are ignored.
-
-Search needs the home JSON output enabled in the site configuration:
-
-```yaml
-outputs:
-  home: [HTML, RSS, JSON]
-```
-
-Search initially shows 30 articles. When more articles match, the result message shows the total count and a button loads the next 30. Repeat until all results are visible. The arrow keys also navigate newly loaded results.
 
 The sitemap omits the search page, the 404 page, and pages with `robotsNoIndex: true`. It also respects Hugo's `sitemap.disable`, change frequency, and priority settings.
 
@@ -92,4 +117,8 @@ Images in article content and post previews open in a dialog when clicked. If a 
 
 ## Theme development
 
-The repository is standalone. Commit changes here, push it to a Git host, then update the submodule pointer in the site repository when ready.
+Edit `assets/css/main.css` and the templates in `layouts/` to develop the design. Commit changes in this standalone repository, then update the submodule pointer in the site repository when ready. This theme has no Go module requirement; install it as a Git submodule or copy it into `themes/hugo-soft-focus`.
+
+## License
+
+Soft Focus is available under the [MIT License](LICENSE). The Noto fonts are loaded from Google Fonts and are not included in this repository.

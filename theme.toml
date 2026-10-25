@@ -1,9 +1,9 @@
 name = "Soft Focus"
 license = "MIT"
 licenselink = "https://opensource.org/licenses/MIT"
-description = "A minimal starting point for a Japanese personal blog"
-tags = ["blog", "minimal", "Japanese"]
-features = ["responsive"]
+description = "A reading-focused Hugo blog theme with layered cards and seasonal light and dark palettes"
+tags = ["blog", "responsive", "light", "dark", "Japanese"]
+features = ["responsive", "search", "light and dark modes", "article previews"]
 min_version = "0.158.0"
 
 [author]
