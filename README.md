@@ -1,6 +1,6 @@
 # Soft Focus
 
-A Hugo blog theme with layered article cards, an autumn light palette, and a winter dark palette. It supports existing Markdown articles without requiring changes to their content files. The theme is designed to live in its own Git repository and be installed as a submodule.
+A Hugo blog theme with layered article cards, an autumn light palette, and a winter dark palette. It can render many existing Hugo Markdown articles without editing them, though compatibility depends on the content and site configuration. The theme is designed to live in its own Git repository and be installed as a submodule.
 
 ## Install
 
@@ -16,7 +16,9 @@ Then set the theme in the site configuration:
 theme: hugo-soft-focus
 ```
 
-Run `hugo server` from the site repository and open the local URL printed by Hugo. The theme reads existing content and `menu.main`; existing article files do not need to change. The theme's interface text is primarily Japanese.
+Run `hugo server` from the site repository and open the local URL printed by Hugo. The theme reads existing content and `menu.main`. Review the rendered pages before switching a live site. The theme's interface text is primarily Japanese.
+
+Standard Markdown elements such as headings, links, images, lists, and code blocks are supported. Content that relies on shortcodes, layouts, or styling supplied by another theme may require equivalent templates or CSS in the site, or changes to the affected Markdown files. Theme-specific configuration options may also have different behavior or no equivalent here.
 
 To update the theme later, update the submodule in your site repository and commit the new submodule pointer.
 
