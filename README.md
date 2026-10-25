@@ -69,6 +69,8 @@ outputs:
 
 Search shows up to 30 articles. When more articles match, the result message shows the total count and notes that only the first 30 are displayed.
 
+The sitemap omits the search page, the 404 page, and pages with `robotsNoIndex: true`. It also respects Hugo's `sitemap.disable`, change frequency, and priority settings.
+
 The older `params.list.summary` values `show`, `auto`, and `hidden` remain accepted as aliases for `section`, `summary`, and `hidden`.
 
 ## Article previews
