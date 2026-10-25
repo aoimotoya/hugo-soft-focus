@@ -34,6 +34,7 @@ All settings below are optional. Add them to your site configuration, not to the
 | `params.author` or page `author` | none | Show the author in article metadata |
 | `params.env` | Hugo environment | Enable production metadata and analytics when set to `production` |
 | `params.analytics.google.SiteVerificationTag` | none | Emit a Google site verification meta tag |
+| `params.description` | none | Description of the site, used on the home page |
 | `params.ShowPostNavLinks` | `true` | Show newer and older article links |
 | `params.ShowCodeCopyButtons` | `false` | Add copy buttons to code blocks on article pages |
 | `params.ShowRssButtonInSectionTermList` | `false` | Show RSS links on section and term lists |
@@ -72,6 +73,8 @@ Search shows up to 30 articles. When more articles match, the result message sho
 The sitemap omits the search page, the 404 page, and pages with `robotsNoIndex: true`. It also respects Hugo's `sitemap.disable`, change frequency, and priority settings.
 
 The older `params.list.summary` values `show`, `auto`, and `hidden` remain accepted as aliases for `section`, `summary`, and `hidden`.
+
+Page metadata uses a page's `description` when present. Articles otherwise use their summary, then their title for image-only content. The home page uses `params.description` when set; lists, search, archives, and the 404 page get descriptive defaults when they have no page description. Paginated lists include the page number. Empty Open Graph and Twitter descriptions are omitted.
 
 ## Article previews
 

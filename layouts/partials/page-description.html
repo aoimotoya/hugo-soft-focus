@@ -1,0 +1,44 @@
+{{- $description := .Description -}}
+{{- if not $description -}}
+  {{- if .IsHome -}}
+    {{- $description = site.Params.description | default .Summary | default (printf "%sのブログです。" site.Title) -}}
+  {{- else if eq .Layout "search" -}}
+    {{- $description = printf "%sの記事を検索できます。" site.Title -}}
+  {{- else if eq .Layout "archives" -}}
+    {{- $description = printf "%sの公開記事を年別に探せます。" site.Title -}}
+  {{- else if eq .Kind "404" -}}
+    {{- $description = printf "%sでお探しのページが見つかりませんでした。" site.Title -}}
+  {{- else if .IsPage -}}
+    {{- $description = .Summary -}}
+  {{- else -}}
+    {{- $description = .Summary -}}
+    {{- if not $description -}}
+      {{- if eq .Kind "term" -}}
+        {{- $description = printf "%sの「%s」に関する記事一覧です。" site.Title .Title -}}
+      {{- else if eq .Kind "taxonomy" -}}
+        {{- if eq (lower .Title) "categories" -}}
+          {{- $description = printf "%sの記事をカテゴリから探せます。" site.Title -}}
+        {{- else if eq (lower .Title) "tags" -}}
+          {{- $description = printf "%sの記事をタグから探せます。" site.Title -}}
+        {{- else -}}
+          {{- $description = printf "%sの%s一覧です。" site.Title .Title -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $description = printf "%sの公開記事一覧です。" site.Title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $description = $description | plainify | replaceRE `\s+` " " -}}
+{{- $description = trim $description " " -}}
+{{- if and (not $description) .IsPage -}}
+  {{- $description = printf "%sの記事「%s」です。" site.Title .Title -}}
+{{- end -}}
+{{- if in (slice "home" "section" "taxonomy" "term") .Kind -}}
+  {{- with .Paginator -}}
+    {{- if gt .PageNumber 1 -}}
+      {{- $description = printf "%s（%dページ目）" $description .PageNumber -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $description -}}

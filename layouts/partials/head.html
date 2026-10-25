@@ -1,6 +1,6 @@
 {{- $title := site.Title -}}
 {{- if not .IsHome -}}{{- $title = printf "%s | %s" .Title site.Title -}}{{- end -}}
-{{- $description := .Description | default .Summary | default site.Params.description | plainify -}}
+{{- $description := partial "page-description.html" . -}}
 {{- $settings := partial "theme-settings.html" . -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
